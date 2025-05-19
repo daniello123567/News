@@ -176,7 +176,7 @@ return ()=> alltweens.revert()
   const fat2info = FatStorys[1];
   const {story} = OpenStory();
    const {show} = newsbro()
-  return <Suspense>
+  return <Suspense fallback={<div>loading...</div>}>
   <div className="w-full  h-fit">
   {<Sidebar/>}
   <Search/>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+"use client"
+import React, { Suspense, useEffect, useState } from 'react'
 import LocalFont from "next/font/local"
 import { Inter, Poppins } from 'next/font/google'
 import Image from 'next/image';
@@ -138,7 +139,7 @@ const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, d
     view();
 
   }
-  return <div id='semih' className='w-full flex gap-[.875rem] h-[10.28rem]  '>
+  return <Suspense fallback={<div>loading...</div>}><div id='semih' className='w-full flex gap-[.875rem] h-[10.28rem]  '>
     <div className='w-[9.375rem] h-full '>
       <Image width={1000} height={1000} className='w-full h-full object-cover' alt='man' src={image} />
     </div>
@@ -147,7 +148,7 @@ const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, d
       <h2 onClick={handleOp} className={`${Druk.className} text-[#212121] text-[1.8rem]   md:tracking-[0.8px] leading-[31.15px] `}>{Title}</h2>
       <p className={`${inter.className} mt-[.5rem] text-[.75rem] text-[#212121]`}>By <span className={`${Havar.className} font-[700]`}>{Author}</span>.</p>
     </div>
-  </div>
+  </div></Suspense>
 }
 
 const Scrolly = () => {
@@ -366,7 +367,7 @@ const Search = () => {
 const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title: string, Author: string, Tag: string, Date: string, Story: string }) => {
   const tag = useSearchParams().get("tag")
   const bg = `bg-[#e6b64e]`
-  return <div id='full' className='  w-full translate-y-[100%] z-50 h-full fixed top-0 left-0 right-0 bottom-0'>
+  return <Suspense fallback={<div>loading...</div>}><div id='full' className='  w-full translate-y-[100%] z-50 h-full fixed top-0 left-0 right-0 bottom-0'>
 
     <div className={`bro ${bg} overflow-y-auto pt-[3.1408rem] md:px-[3.3208rem] px-[1rem] w-full relative h-full`}>
       <div className='fixed p-[.2em] z-50  rounded-full top-[1em] right-[1em]'>
@@ -392,7 +393,7 @@ const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title
         </div>
       </div>
     </div>
-  </div>
+  </div></Suspense>
 }
 
 

@@ -91,7 +91,6 @@ gsap.timeline().from(".maluk",{
       start:"top 80%",
       end:"bottom 100%",
       scrub:true,
-      markers:true
     }
   }).set(split.lines,{color:"black",stagger:0.1},0.1)
 gsap.matchMedia().add("(max-width:767px)",()=>{gsap.from("#fat",{

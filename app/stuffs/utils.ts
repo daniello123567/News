@@ -56,6 +56,14 @@ type search = {
   searchAppear:()=>void,
   searchDisApp:()=>void
 }
+type o = {
+  show:boolean,
+  setshow:()=>void
+}
+const newsbro = create<o>((set)=>({
+  show:false,
+  setshow:()=>set((state)=>({show:!state.show}))
+}))
 const search = create<search>(()=>({
    searchAppear:()=>{
     gsap.set("#blur",{
@@ -222,4 +230,4 @@ function getContextSnippets(
 }
 
 
-export {FatStorys,OpenStory, Story, menu,search,semistorys ,getContextSnippets}
+export {FatStorys,OpenStory,newsbro, Story, menu,search,semistorys ,getContextSnippets}

@@ -1,10 +1,10 @@
 "use client"
 import TextPlugin from "gsap/TextPlugin";
 import { useEffect } from "react";
-import { Fat, Footer, Full, Header,  MobileSection, Search, SecondSection, SemiNews, Sidebar, Third } from "./components";
+import { CancelBtn, Fat, Footer, Full, Header,  MobileSection, Search, SecondSection, SemiNews, Sidebar, Third } from "./components";
 import gsap from 'gsap'
 import { ScrollTrigger, SplitText,DrawSVGPlugin } from "gsap/all";
-import { FatStorys, OpenStory, semistorys } from "./stuffs/utils";
+import { FatStorys, newsbro, OpenStory, semistorys } from "./stuffs/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 gsap.registerPlugin(ScrollTrigger,SplitText,TextPlugin,DrawSVGPlugin)
 function News() {
@@ -180,11 +180,18 @@ return ()=> alltweens.revert()
   }, []);
   const fat1Info = FatStorys[0];
   const fat2info = FatStorys[1];
-  const {story} = OpenStory()
+  const {story} = OpenStory();
+   const {show} = newsbro()
   return <>
   <div className="w-full  h-fit">
   {<Sidebar/>}
   <Search/>
+  {show&&<div id="newsletterman" className="w-full h-full top-0 z-50 backdrop-blur-sm bg-[oklab(0_0_0_/_0.2)] fixed">
+  <div className="flex justify-center items-center w-full h-full">
+  <div className="w-[23.75rem] relative h-[90%] border bg-white p-[1em]"><Third/>
+    <div className="w-[3em] h-[3em] bg-gray-100 rounded-full top-[1em]  left-[1em] flex justify-center items-center text-black absolute"><CancelBtn nowork={true}/> </div>
+</div>
+  </div></div>}
   <Full Story={story.Story} image={story.image} Author={story.Author} Tag={story.Tag} Date={story.Date} Title={story.Title} />
   <div className=" w-full relative overflow-hidden">
     <Header />

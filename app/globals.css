@@ -61,6 +61,7 @@
   background-color: yellow;
   color: white;
 }
+
 #log{
   opacity:0.5;
   animation: fadeIn 2s forwards ease-in-out;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LocalFont from "next/font/local"
 import { Inter, Poppins } from 'next/font/google'
 import Image from 'next/image';
-import { getContextSnippets, menu, OpenStory, search, semistorys, Story } from './stuffs/utils';
+import { getContextSnippets, menu, newsbro, OpenStory, search, semistorys, Story } from './stuffs/utils';
 import { ArrayOfSvgs } from './stuffs/utils2';
 import { useRouter, useSearchParams } from 'next/navigation';
 const inter = Inter({ subsets: ["latin"] })
@@ -62,6 +62,19 @@ const Hamburger2 = () => {
 
 
 const Header = () => {
+  const router = useRouter();
+  const {openClose} = menu();
+  const {setshow} = newsbro()
+const handleRoute = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.innerText.includes('Clear')) {
+      router.push(`/?tag=${e.currentTarget.innerText}`);
+      openClose()
+    } else {
+      router.push(window.location.pathname);
+      openClose()
+    }
+  }
+
   return <div id='header' className={`${Havar.className} lg:px-[2.55em] px-[1.5rem]  bg-white fixed left-0 right-0 z-10 w-full h-fit`}>
     <div className={` lg:text-[1.0245rem]  h-[5.1875rem] lg:border-b  lg:mx-auto lg:p-0 lg:none lg:h-[3rem] lg:mt-[1.5625rem] flex justify-between items-center py-[1.25rem]`}>
       <div className='w-full lg:pb-[.75rem] hidden lg:block h-full'>
@@ -75,7 +88,7 @@ const Header = () => {
           <div className='w-[33.5988rem] flex items-center justify-between h-[2.1875rem] '>
             <div className='links flex gap-[2rem] justify-between items-center w-fit'>
               <span>PODCASTS</span>
-              <span>NEWSLETTERS</span>
+              <span onClick={setshow}>NEWSLETTERS</span>
               <span>MAGAZINE</span>
               <span>ABOUT</span>
             </div>
@@ -90,9 +103,10 @@ const Header = () => {
       <Logo />
       <SearchBtn />
     </div>
+
     <div className='hidden  lg:block h-[3.1437rem] border-b'>
       <div className=' flex w-full h-full items-center justify-between'>
-        {Navs.map((nav: string) => { return <p key={nav}>{nav}</p> })}
+        {Navs.map((nav: string) => { return <p className='cursor-pointer' onClick={(e)=>handleRoute(e)} key={nav}>{nav}</p> })}
       </div>
     </div>
   </div>
@@ -160,8 +174,8 @@ const Scrolly = () => {
 const Third = () => {
   return <>
     <div className="flex bg-white flex-col w-full h-full gap-[2em]">
-      <div className="w-full h-[15.9766rem] z-50 IMAGE ">
-        <iframe className='w-full object-cover h-full'
+      <div className="w-full h-[15.9766rem]  IMAGE ">
+        <iframe title='video' name='hello' className='w-full object-cover h-full'
           src="https://kinescope.io/embed/12wt5VJ63V2Ln6SZFeEGRs?&muted=true&autoplay=true&autopause=false&loop=true"
 
           allow="autoplay; fullscreen"
@@ -236,16 +250,18 @@ const MobileSection = () => {
     </div>
   </div>
 }
-const CancelBtn = ({ naforsearch, naforstory }: { naforstory?: boolean, naforsearch?: boolean }) => {
+const CancelBtn = ({ naforsearch,nowork, naforstory }: {nowork?:boolean, naforstory?: boolean, naforsearch?: boolean }) => {
   const { openClose } = menu()
   const { close } = Story()
   const { searchDisApp } = search()
-
+  const {setshow} = newsbro()
   const handleClose = () => {
     if (naforsearch) {
       searchDisApp()
     } else if (naforstory) {
       close()
+    }else if(nowork){
+           setshow()
     } else {
       openClose()
     }
@@ -263,7 +279,7 @@ const Sidebar = () => {
   const router = useRouter()
   const { openClose } = menu()
   const handleRoute = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget.innerText !== 'Clear') {
+    if (!e.currentTarget.innerText.includes('Clear')) {
       router.push(`/?tag=${e.currentTarget.innerText}`);
       openClose()
     } else {
@@ -373,11 +389,11 @@ const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title
           <p>{Tag}</p>
           <p>— {Date}</p>
         </div>
-        <div id='baba' className='w-full pt-[2.7065rem] min-h-full'>
+        <div id='baba' className='w-full lg:flex lg:justify-between pt-[2.7065rem] min-h-full'>
           <div className='image w-[18.75rem] h-[13.4375rem] bg-blue-500'>
             <Image className='w-full h-full object-cover' width={1000} height={1000} src={image} alt={Title} />
           </div>
-          <p className={`${FragmentLight.className} font-[300] vashu leading-[23.3333px] pb-[5em] text-[1.25rem] mt-[1em]`}> {Story}</p>
+          <p className={`${FragmentLight.className} lg:w-[50%] font-[300] vashu leading-[23.3333px] pb-[5em] text-[1.25rem] mt-[1em]`}> {Story}</p>
         </div>
       </div>
     </div>
@@ -386,4 +402,4 @@ const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title
 
 
 
-export { Fat, Search, SemiNews, MobileSection, Third, Footer, Full, Header, SecondSection, Sidebar }
+export { Fat, Search,CancelBtn, SemiNews, MobileSection, Third, Footer, Full, Header, SecondSection, Sidebar }

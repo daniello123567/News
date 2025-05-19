@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+  .counter, .hero{
+    clipPath: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+  }
+@theme{
+  --breakpoint-juk:565px
+}
+.monalisa svg{
+  @apply w-[5em] h-full
+}
+.title{
+  font-size: clamp(3.5832rem,2.913rem + 2.7494vw,5.6624rem);
+}
+.stuff{
+  margin-top: clamp(2rem,1.8791rem + 0.4959vw,2.375rem);
+  padding-left: clamp(0.5rem,0.4597rem + 0.1653vw,0.625rem);
+  font-size: clamp(1.2rem,1.1083rem + 0.376vw,1.4844rem);
+  margin-bottom: clamp(1.5rem,1.3993rem + 0.4132vw,1.8125rem);
+}
+.bro::-webkit-scrollbar{
+  display: none;
+}
+.bro{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#fat2 #tit{
+  color: rgba(0, 0, 0, 0.199)
+}
+.cursor{
+  color: black;
+  animation: blink 0.7s steps(1) infinite;
+}
+@keyframes blink{
+  50%{
+    opacity: 0;
+  }
+}
+
+ @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+.floatbro {
+            animation: float 3s ease-in-out infinite;
+            fill:white
+        }
+
+.vashu::first-letter{
+ font-size: 3rem;
+ font-weight:950;
+}
+.highlight{
+  background-color: yellow;
+  color: white;
+}
+#log{
+  opacity:0.5;
+  animation: fadeIn 2s forwards ease-in-out;
+}
+@keyframes fadeIn {
+  to{
+    opacity: 1;
+  }
+}
+#kaka{
+  mix-blend-mode: multiply;
+  opacity: 1;
+  pointer-events: none;
+}
+.fack{
+  font-size: clamp(2.4883rem,2.1223rem + 1.5017vw,3.624rem);
+}
+.kai{
+  font-size: clamp(1rem,0.9396rem + 0.2479vw,1.1875rem);
+}

@@ -27,10 +27,7 @@ gsap.timeline().from(".maluk",{
     ease:"power2.in"
    });
   setTimeout(()=>{
-    gsap.to("#loader",{
-      ease:"power2.inOut",
-      display:"none"
-    })
+
     gsap.matchMedia().add("(max-width:767px)",()=>{
       gsap.from("#kaka",{
         xPercent:-50,
@@ -69,13 +66,9 @@ gsap.timeline().from(".maluk",{
 
  gsap.from("#ori",{x:-30,scrub:0.7,opacity:0,duration:0.8,start:"top 20%",scrollTrigger:{trigger:"#ori"}})
  gsap.to(".vad",{rotate:360,scrollTrigger:{trigger:".vad",scrub:true,start:"top bottom"}})
- gsap.from(".thenews",{scale:0.3,ease:"power4.inOut",duration:0.5,scrollTrigger:{start:"top 90%",end:"top 40%",scrub:true,trigger:".thenews"}})
  const lines = new SplitText(".began",{type:"lines"});
  gsap.from(lines.lines,{y:30,opacity:0,duration:0.5,stagger:0.1,ease:"power3.inOut",scrollTrigger:{trigger:".began",start:"top 80%"}})
- gsap.matchMedia().add("(max-width:767px)",()=>{
 
-
- })
  const sentences = ["The Latest","Most reliable"];
 
   const timeL = gsap.timeline({repeat:-1,repeatDelay:1});
@@ -98,10 +91,11 @@ gsap.timeline().from(".maluk",{
       start:"top 80%",
       end:"bottom 100%",
       scrub:true,
+      markers:true
     }
   }).set(split.lines,{color:"black",stagger:0.1},0.1)
 gsap.matchMedia().add("(max-width:767px)",()=>{gsap.from("#fat",{
-  delay:0.7,
+  delay:0.8,
   y:200,
     opacity:0,
     duration:0.7,

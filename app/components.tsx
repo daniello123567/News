@@ -5,7 +5,7 @@ import { Inter, Poppins } from 'next/font/google'
 import Image from 'next/image';
 import { getContextSnippets, menu, newsbro, OpenStory, search, semistorys, Story } from './stuffs/utils';
 import { ArrayOfSvgs } from './stuffs/utils2';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ["latin"] })
 const Havar = LocalFont({ src: "./fonts/halvar-breitschrift-regular.woff2" });
 const Comorant = LocalFont({ src: "./fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-iNM8.woff2" });
@@ -130,7 +130,6 @@ const Fat = ({ story, date, image, Tag, Title, Description, Author, isHiddenInMd
   </div>
 }
 const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, date: string, Tag: string, Title: string, Author: string, image: string }) => {
-  const tag = useSearchParams().get("tag")
 
   const { view } = Story()
   const { setStory } = OpenStory();
@@ -144,7 +143,7 @@ const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, d
       <Image width={1000} height={1000} className='w-full h-full object-cover' alt='man' src={image} />
     </div>
     <div className='h-full w-[12.5rem] flex flex-col justify-between '>
-      <p id='tag' className={`${Havar.className} ${tag?.includes(Tag) && 'bg-yellow-300 text-white'} text-[.75rem] text-[#6e6e6e]`}>{Tag}</p>
+      <p id='tag' className={`${Havar.className}  text-[.75rem] text-[#6e6e6e]`}>{Tag}</p>
       <h2 onClick={handleOp} className={`${Druk.className} text-[#212121] text-[1.8rem]   md:tracking-[0.8px] leading-[31.15px] `}>{Title}</h2>
       <p className={`${inter.className} mt-[.5rem] text-[.75rem] text-[#212121]`}>By <span className={`${Havar.className} font-[700]`}>{Author}</span>.</p>
     </div>
@@ -365,7 +364,6 @@ const Search = () => {
   </div>
 }
 const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title: string, Author: string, Tag: string, Date: string, Story: string }) => {
-  const tag = useSearchParams().get("tag")
   const bg = `bg-[#e6b64e]`
   return <Suspense fallback={<div>loading...</div>}><div id='full' className='  w-full translate-y-[100%] z-50 h-full fixed top-0 left-0 right-0 bottom-0'>
 
@@ -381,7 +379,7 @@ const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title
       </div>
       <hr className='line' />
       <div className='w-full h-auto '>
-        <div id='tag' className={`${FragmentLight.className} ${tag?.includes(Tag) && 'bg-yellow-300 text-white'} text-[#0e0d12] text-[.8384rem] md:text-[.9375rem] flex justify-between items-center pt-[17px]`}>
+        <div id='tag' className={`${FragmentLight.className}  text-[#0e0d12] text-[.8384rem] md:text-[.9375rem] flex justify-between items-center pt-[17px]`}>
           <p>{Tag}</p>
           <p>— {Date}</p>
         </div>

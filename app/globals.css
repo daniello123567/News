@@ -48,10 +48,7 @@
                 transform: translateY(0px);
             }
         }
-.floatbro {
-            animation: float 3s ease-in-out infinite;
-            fill:white
-        }
+
 
 .vashu::first-letter{
  font-size: 3rem;

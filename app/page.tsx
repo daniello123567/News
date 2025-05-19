@@ -1,6 +1,6 @@
 "use client"
 import TextPlugin from "gsap/TextPlugin";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { CancelBtn, Fat, Footer, Full, Header,  MobileSection, Search, SecondSection, SemiNews, Sidebar, Third } from "./components";
 import gsap from 'gsap'
 import { ScrollTrigger, SplitText,DrawSVGPlugin } from "gsap/all";
@@ -176,7 +176,7 @@ return ()=> alltweens.revert()
   const fat2info = FatStorys[1];
   const {story} = OpenStory();
    const {show} = newsbro()
-  return <>
+  return <Suspense>
   <div className="w-full  h-fit">
   {<Sidebar/>}
   <Search/>
@@ -217,6 +217,8 @@ return ()=> alltweens.revert()
 
   </div>
   <Footer/>
-  </div></>
+  </div>
+
+  </Suspense>
 }
 export default News;

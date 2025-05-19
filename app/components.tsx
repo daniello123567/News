@@ -77,7 +77,7 @@ const handleRoute = (e: React.MouseEvent<HTMLDivElement>) => {
 
           <div className='flex items-center justify-between w-[12.625rem]'>
             <Hamburger2 />
-            <Logo2 />
+            <Logo2/>
           </div>
 
           <div className='w-[33.5988rem] flex items-center justify-between h-[2.1875rem] '>

@@ -1,22 +1,15 @@
 "use client"
 import TextPlugin from "gsap/TextPlugin";
-import { Suspense, useEffect } from "react";
+import {  useEffect } from "react";
 import { CancelBtn, Fat, Footer, Full, Header,  MobileSection, Search, SecondSection, SemiNews, Sidebar, Third } from "./components";
 import gsap from 'gsap'
 import { ScrollTrigger, SplitText,DrawSVGPlugin } from "gsap/all";
-import { FatStorys, newsbro, OpenStory, semistorys } from "./stuffs/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { currentTag, FatStorys, newsbro, OpenStory, semistorys } from "./stuffs/utils";
+import { useRouter} from "next/navigation";
 gsap.registerPlugin(ScrollTrigger,SplitText,TextPlugin,DrawSVGPlugin)
 function News() {
-  const query:string|null = useSearchParams().get("tag");
-
-useEffect(()=>{
-  if(!query)return;
- const element = Array.from(document.querySelectorAll('#tag')).find(el=>el.textContent?.includes(query))
- element?.scrollIntoView({behavior:"smooth"})
 
 
-},[query])
  const router = useRouter();
 
   useEffect(() => {
@@ -171,11 +164,17 @@ gsap.matchMedia().add("(max-width:767px)",()=>{gsap.from("#fat",{
 return ()=> alltweens.revert()
 
   }, []);
+    const {curr} = currentTag()
+useEffect(()=>{
+ const element = Array.from(document.querySelectorAll('#tag')).find(el=>el.textContent?.includes(curr))
+ element?.scrollIntoView({behavior:"smooth"})
+
+},[curr])
   const fat1Info = FatStorys[0];
   const fat2info = FatStorys[1];
   const {story} = OpenStory();
    const {show} = newsbro()
-  return <Suspense fallback={<div>loading...</div>}>
+  return <>
   <div className="w-full  h-fit">
   {<Sidebar/>}
   <Search/>
@@ -218,6 +217,6 @@ return ()=> alltweens.revert()
   <Footer/>
   </div>
 
-  </Suspense>
+  </>
 }
 export default News;

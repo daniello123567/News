@@ -228,6 +228,12 @@ function getContextSnippets(
     return highlightedSnippet;
   });
 }
-
-
-export {FatStorys,OpenStory,newsbro, Story, menu,search,semistorys ,getContextSnippets}
+type lama = {
+  curr:string,
+  setCurr:(text:string)=>void;
+}
+const currentTag = create<lama>((set)=>({
+  curr:"",
+  setCurr:(text)=>set(()=>({curr:text}))
+}))
+export {currentTag,FatStorys,OpenStory,newsbro, Story, menu,search,semistorys ,getContextSnippets}

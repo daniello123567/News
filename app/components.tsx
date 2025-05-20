@@ -1,16 +1,14 @@
 "use client"
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LocalFont from "next/font/local"
 import { Inter, Poppins } from 'next/font/google'
 import Image from 'next/image';
-import { getContextSnippets, menu, newsbro, OpenStory, search, semistorys, Story } from './stuffs/utils';
+import { currentTag, getContextSnippets, menu, newsbro, OpenStory, search, semistorys, Story } from './stuffs/utils';
 import { ArrayOfSvgs } from './stuffs/utils2';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ["latin"] })
 const Havar = LocalFont({ src: "./fonts/halvar-breitschrift-regular.woff2" });
 const Comorant = LocalFont({ src: "./fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-iNM8.woff2" });
-const Noe = LocalFont({ src: "./fonts/noe-standard-semibold.woff2" });
-const pt = LocalFont({ src: "./fonts/pt-serif-regular.woff2" });
 const PP = LocalFont({ src: "./fonts/PPNeueMachina-InktrapSemibold-e49286f0.woff2" })
 const Flecha = LocalFont({ src: "./fonts/flecha-bronzea-medium.woff2" })
 const Navs: Array<string> = ["Gaming", "Creativity", "Artificial Intelligence", "Robotics", "Art", "Clear Filter"]
@@ -130,7 +128,8 @@ const Fat = ({ story, date, image, Tag, Title, Description, Author, isHiddenInMd
   </div>
 }
 const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, date: string, Tag: string, Title: string, Author: string, image: string }) => {
-  const tag = useSearchParams().get("tag")
+  const {curr} = currentTag()
+  const tag = curr
 
   const { view } = Story()
   const { setStory } = OpenStory();
@@ -139,7 +138,7 @@ const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, d
     view();
 
   }
-  return <Suspense fallback={<div>loading...</div>}><div id='semih' className='w-full flex gap-[.875rem] h-[10.28rem]  '>
+  return <><div id='semih' className='w-full flex gap-[.875rem] h-[10.28rem]  '>
     <div className='w-[9.375rem] h-full '>
       <Image width={1000} height={1000} className='w-full h-full object-cover' alt='man' src={image} />
     </div>
@@ -148,7 +147,7 @@ const SemiNews = ({ Tag, Title, Author, image, story, date }: { story: string, d
       <h2 onClick={handleOp} className={`${Druk.className} text-[#212121] text-[1.8rem]   md:tracking-[0.8px] leading-[31.15px] `}>{Title}</h2>
       <p className={`${inter.className} mt-[.5rem] text-[.75rem] text-[#212121]`}>By <span className={`${Havar.className} font-[700]`}>{Author}</span>.</p>
     </div>
-  </div></Suspense>
+  </div></>
 }
 
 const Scrolly = () => {
@@ -180,8 +179,8 @@ const Third = () => {
       </div>
       <div className="h-fit text-center w-full ">
         <p className={`${inter.className} mb-[.5rem]  text-[.75rem] font-[400] tracking-[.165rem] uppercase`}>Newsletters</p>
-        <p className={`${Noe.className} text-[2.25rem] leading-[2.8575rem] mb-[.625rem] font-semibold`}>Stay connected to the city</p>
-        <p className={`mb-[1.25rem] leading-[1.43rem] ${pt.className}`}>Start your mornings with a fresh take on the day&apos;s top local news from Sarah Fenske and Ryan Krull.</p>
+        <p className={`${Druk.className} text-[2.25rem] leading-[2.8575rem] mb-[.625rem]`}>Stay connected to the city</p>
+        <p className={`mb-[1.25rem] leading-[1.43rem] ${FragmentLight.className}`}>Start your mornings with a fresh take on the day&apos;s top local news from Sarah Fenske and Ryan Krull.</p>
         <input placeholder='enter email' className='bg-[#f2f2f2] w-full py-[.75rem] px-[1rem]' title="newsletter" type="text" />
         <button className={`h-[2.625rem] text-white mt-[.
         9em] font-[500] mt-[.9em] w-full bg-[#e2042a] ${Havar.className}`}>SUSCRIBE FOR FREE</button>
@@ -272,14 +271,14 @@ const VisitBtn = () => {
   </svg>
 }
 const Sidebar = () => {
-  const router = useRouter()
+  const {setCurr} = currentTag()
   const { openClose } = menu()
   const handleRoute = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!e.currentTarget.innerText.includes('Clear')) {
-      router.push(`/?tag=${e.currentTarget.innerText}`);
+      setCurr(e.currentTarget.innerText);
       openClose()
     } else {
-      router.push(window.location.pathname);
+      setCurr("")
       openClose()
     }
   }
@@ -365,9 +364,10 @@ const Search = () => {
   </div>
 }
 const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title: string, Author: string, Tag: string, Date: string, Story: string }) => {
-  const tag = useSearchParams().get("tag")
+  const {curr} = currentTag()
+  const tag = curr;
   const bg = `bg-[#e6b64e]`
-  return <Suspense fallback={<div>loading...</div>}><div id='full' className='  w-full translate-y-[100%] z-50 h-full fixed top-0 left-0 right-0 bottom-0'>
+  return <><div id='full' className='  w-full translate-y-[100%] z-50 h-full fixed top-0 left-0 right-0 bottom-0'>
 
     <div className={`bro ${bg} overflow-y-auto pt-[3.1408rem] md:px-[3.3208rem] px-[1rem] w-full relative h-full`}>
       <div className='fixed p-[.2em] z-50  rounded-full top-[1em] right-[1em]'>
@@ -393,7 +393,7 @@ const Full = ({ Title, Author, Tag, image, Date, Story }: { image: string, Title
         </div>
       </div>
     </div>
-  </div></Suspense>
+  </div></>
 }
 
 
